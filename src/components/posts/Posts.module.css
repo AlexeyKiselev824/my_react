@@ -1,0 +1,123 @@
+.posts_container {
+    padding-bottom: 10px;
+}
+
+.createPost-btn {
+    color: white;
+    background-color: #FF7B47;
+    border: 1px solid #FF7B47;
+    transition: all 0.3s ease 0s;
+    margin: 10px 0 0 0;
+}
+
+.createPost-btn:hover {
+    border: 1px solid #FF7B47;
+    background-color: #fff;
+    color: #FF7B47;
+}
+
+.createPost-btn:active {
+    box-shadow: inset 0 0 15px #FF7B47;
+}
+
+.postItem-btn {
+    color: #0D5C63;
+    width: 10rem;
+    border: 1px solid #0D5C63;
+    background-color: white;
+    transition: all 0.3s ease 0s;
+    margin: 5px 10px 5px 5px;
+}
+
+.postItem-btn:hover {
+    background-color: #0D5C63;
+    color: #fff;
+}
+
+.postItem-btn:active {
+    box-shadow: inset 0 0 15px white;
+}
+
+.postItem-btn_main {
+    width: auto;
+}
+
+.postItem-btn-group {
+    text-align: center;
+}
+
+.posts {
+    padding: 10px 0 0 0;
+}
+
+.posts-error {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.posts__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px #0D5C63 solid;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: pre-line;
+}
+
+.posts__content {
+    padding: 5px 10px;
+    max-width: 800px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    line-clamp: 10;
+    box-orient: vertical;
+}
+
+.posts__title {
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    font-size: 1.3rem;
+    line-height: 133%;
+}
+
+.posts__title:not(:last-child) {
+    margin: 0px 0px 10px 0px;
+}
+
+.posts__text {
+    color: #4e4e4e;
+    line-height: 142%;
+}
+
+.search-sort {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0 0;
+}
+
+@media (max-width: 32em) {
+    .search-sort {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 30em) {
+    .posts__content {
+        padding: 5px 10px;
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+    }
+
+    .posts__title {
+        font-weight: 700;
+        font-size: 1rem;
+    }
+}

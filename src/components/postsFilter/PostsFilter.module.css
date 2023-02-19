@@ -1,0 +1,32 @@
+.filter__input {
+    margin: 0px 10px 0px 0px;
+    min-width: 10rem;
+}
+
+.filter__selectors {
+    display: flex;
+    align-items: center;
+}
+
+.filter__selectors__sort {
+    margin: 0px 10px 0px 0px;
+}
+
+@media (max-width: 32em) {
+    .filter__selectors {
+        flex-wrap: wrap;
+    }
+
+    .filter__input {
+        margin: 0px 0px 10px 0px;
+        min-width: 10rem;
+    }
+
+}
+
+@media (max-width: 19.96em) {
+    .filter__selectors__sort {
+        margin: 0px 10px 10px 0px;
+    }
+
+}

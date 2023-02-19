@@ -1,0 +1,33 @@
+.header {
+    width: 100%;
+    background-color: #17213c;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    min-height: 100px;
+    align-items: center;
+    background-color: #ff7b47;
+}
+
+.header__logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: inherit;
+    text-shadow: 2px 2px 3px white;
+}
+
+/* 768px */
+@media (max-width: 48em) {
+    .header-container {
+        min-height: 80px;
+    }
+}
+
+/* 480px */
+@media (max-width: 30em) {
+    .header-container {
+        min-height: 60px;
+    }
+}

@@ -1,0 +1,11 @@
+.myBtn {
+    border-radius: 37px;
+    letter-spacing: 0.2px;
+    min-height: 40px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 150%;
+    padding: 10px 25px;
+    margin: 0;
+    cursor: pointer;
+}

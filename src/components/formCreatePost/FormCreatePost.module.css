@@ -1,0 +1,21 @@
+.form-btn {
+    color: white;
+    background-color: #FF7B47;
+    border: 1px solid #FF7B47;
+    transition: all 0.3s ease 0s;
+    margin: 10px 0;
+}
+
+.form-btn:hover {
+    border: 1px solid #FF7B47;
+    background-color: #fff;
+    color: #FF7B47;
+}
+
+.form-btn:active {
+    box-shadow: inset 0 0 15px #FF7B47;
+}
+
+.input-title {
+    margin: 5px 0;
+}

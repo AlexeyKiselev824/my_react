@@ -1,0 +1,22 @@
+.mySelect {
+    font-weight: 700;
+    width: 10rem;
+    color: white;
+    line-height: 1.3;
+    padding: .6rem 1.4rem .5rem .8rem;
+    border: 1px solid #0d5c63;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+    border-radius: 16px;
+    background-color: #FF7B47;
+    cursor: pointer;
+}
+
+.mySelect:focus {
+    box-shadow: 0 0 1px 3px #0d5c63a0;
+    color: #222;
+    outline: none;
+}
+
+.mySelect option {
+    font-weight: 500;
+}
