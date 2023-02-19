@@ -12,7 +12,7 @@ import PostsFilter from '../postsFilter/PostsFilter';
 import { sortedAndSearchedPosts } from '../../helpers/sortedAndSearchedPosts';
 import Pagination from '../UI/pagination/Pagination';
 import { getPagesCount } from '../../helpers/getPagesCount';
-import { apiInitialState, setLimit } from '../../store/reducers/apiParamSlice';
+import { apiInitialState, setLimit, setPage } from '../../store/reducers/apiParamSlice';
 
 const PostContainer = memo(() => {
     const searchDelay = useAppSelector(state => state.filter.delay);
@@ -34,6 +34,7 @@ const PostContainer = memo(() => {
 
     useEffect(() => {
         if (searchDelay) {
+            dispatch(setPage(1));
             dispatch(setLimit(-1));
         } else {
             dispatch(setLimit(apiInitialState.limit));
