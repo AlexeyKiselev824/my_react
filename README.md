@@ -1,22 +1,26 @@
-## MyReact
+# MyReact
 Front-end приложение для просмотра, создания и редактирования постов.
 
-### Стек технологий:
+## Стек технологий:
 * React + React Hooks
 * React Router
 * TypeScript
 * Redux Toolkit, RTK Query
 * CSS modules
 
-### Сервер для хранения данных:
+## Сервер для хранения данных:
 Реализован с помощью фейкового REST API взятого с GitHub:
 `https://github.com/typicode/json-server`
 
-### Для запуска:
-#### `npm start`
-#### `json-server --watch db.json --port 5000`
+## Для запуска:
+```npm
+npm start
+```
+```
+json-server --watch db.json --port 5000
+```
 
-### Описание:
+## Описание:
 1. Статовая страница для входа (введите любой логин и пароль)
 2. Главная страница с постами содержит:
     * сами посты
@@ -25,3 +29,10 @@ Front-end приложение для просмотра, создания и р
     * формы для добавления и редактирования постов
     * при открытии поста, реализованна более удобная форма для его редактирования
 3. Страница About - экспериментальная, добавлен счетчик из документации redux/toolkit. А так же ютуб-видио.
+
+## Скриншоты:
+1. Главная страница
+![Главная страница](https://github.com/AlexeyKiselev824/_pages/blob/main/_image/my-react-1.png)
+
+2. Страница поста
+![Главная страница](https://github.com/AlexeyKiselev824/_pages/blob/main/_image/my-react-2.png)
