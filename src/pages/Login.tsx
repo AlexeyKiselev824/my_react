@@ -4,11 +4,11 @@ import LoginForm from '../components/loginForm/LoginForm';
 
 const Login = () => {
     return (
-        <div>
+        <>
             <Layout>
                 <LoginForm />
             </Layout>
-        </div>
+        </>
     )
 }
 
