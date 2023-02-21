@@ -15,14 +15,15 @@ export const postFormSlice = createSlice({
     initialState,
     reducers: {
         setTitlePost: (state, action: PayloadAction<string>) => {
-            state.title = action.payload
+            state.title = action.payload;
         },
         setBodyPost: (state, action: PayloadAction<string>) => {
-            state.body = action.payload
-        }
+            state.body = action.payload;
+        },
+        resetForm: () => initialState
     },
 })
 
-export const { setBodyPost, setTitlePost } = postFormSlice.actions;
+export const { setBodyPost, setTitlePost, resetForm } = postFormSlice.actions;
 
 export default postFormSlice.reducer;

@@ -4,19 +4,19 @@ import { usePagination } from '../../../hooks/usePagination';
 import { setPage } from '../../../store/reducers/apiParamSlice';
 import classes from './Pagination.module.css';
 
-interface PaginationProps {
+interface IPaginationProps {
     totalPages: number;
     page: number;
 }
 
-const Pagination: FC<PaginationProps> = memo(({ totalPages, page }) => {
+const Pagination: FC<IPaginationProps> = memo(({ totalPages, page }) => {
     const dispatch = useAppDispatch();
-    const pagesArray = usePagination(totalPages);
+    const pagesArray: number[] = usePagination(totalPages);
 
     return (
         <>
             <div className={classes['pagination__wrapper']}>
-                {pagesArray.map(p =>
+                {pagesArray.map((p: number) =>
                     <span
                         key={p}
                         defaultValue={p}

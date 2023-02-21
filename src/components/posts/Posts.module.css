@@ -103,9 +103,19 @@
     margin: 10px 0 0 0;
 }
 
+.editor-form {
+    background-color: transparent;
+    min-width: 40rem;
+}
+
 @media (max-width: 32em) {
     .search-sort {
         flex-wrap: wrap;
+    }
+
+    .editor-form {
+        /* background-color: transparent; */
+        min-width: 100%;
     }
 }
 

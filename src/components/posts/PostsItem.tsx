@@ -1,65 +1,61 @@
 import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { URL_POSTS } from '../../constants/api';
 import { useAppSelector } from '../../hooks/redux';
 import { IPost } from '../../models/IPost';
+import { postsAPI } from '../../services/PostsService';
+import EditorForm from '../EditorForm/EditorForm';
 import MyButton from '../UI/button/MyButton';
 import { HightLightingSyntax } from '../UI/highlighting/HighlightingSyntax';
 import MyModal from '../UI/myModal/MyModal';
 import classes from './Posts.module.css';
 
-interface PostItemProps {
+interface IPostItemProps {
     post: IPost
     remove: (post: IPost) => void
-    update: (post: IPost) => void
 }
 
 
-const PostItem: FC<PostItemProps> = memo(({ post, remove, update }) => {
+const PostItem: FC<IPostItemProps> = memo(({ post, remove }) => {
     const router = useNavigate();
     const [modal, setModal] = useState(false);
+    const [modalEditor, setModalEditor] = useState(false);
     const searchDelay = useAppSelector(state => state.filter.delay);
+    const [updatePost] = postsAPI.useUpdatePostMutation();
 
     const highlight = useCallback((str: string) => {
         return <HightLightingSyntax filter={searchDelay} str={str} />
     }, [searchDelay])
 
-    const handleRemove = (event: React.MouseEvent) => {
+    const handleRemove = (event: React.MouseEvent, post: IPost) => {
         event.stopPropagation();
         remove(post);
         setModal(false);
     }
 
-    const handlerUpdate = (event: React.MouseEvent) => {
-        event.stopPropagation()
-        const title = prompt('Title post') || "";
-        const body = prompt('Conent post') || "";
-        if (!title && body) {
-            update({ ...post, body });
-        }
-        if (title && !body) {
-            update({ ...post, title });
-        }
-        if (title && body) {
-            update({ ...post, title, body });
-        }
-        setModal(false);
+    const handlerUpdate = async (post: IPost) => {
+        await updatePost(post);
+        setModalEditor(false);
     }
 
+    const handlerOpenModalEditor = () => {
+        setModalEditor(true);
+        setModal(false);
+    }
 
     const editPost = (e: React.MouseEvent) => {
         e.stopPropagation();
         setModal(true);
     }
 
-    const openPost = () => {
-        router(`/posts/${post.id}`);
-        console.log(post)
+    const openPost = (id: number) => {
+        router(URL_POSTS + id);
     }
 
     return (
         <>
             <div className={classes['posts']}>
-                <div className={classes['posts__body']} onClick={openPost}>
+                <div className={classes['posts__body']} onClick={() => openPost(post.id)}>
                     <div className={classes['posts__content']}>
                         <h3 className={classes['posts__title']}>{post.id}. {highlight(post.title)}</h3>
                         <div className={classes['posts__text']}>{post.body}</div>
@@ -75,13 +71,20 @@ const PostItem: FC<PostItemProps> = memo(({ post, remove, update }) => {
                 </div>
                 <MyModal visible={modal} setVisible={setModal}>
                     <div className={classes['postItem-btn-group']}>
-                        <MyButton classAdd={classes['postItem-btn']} onClick={handlerUpdate}>
+                        <MyButton classAdd={classes['postItem-btn']} onClick={handlerOpenModalEditor}>
                             Edit post
                         </MyButton>
-                        <MyButton classAdd={classes['postItem-btn']} onClick={handleRemove}>
+                        <MyButton classAdd={classes['postItem-btn']} onClick={e => handleRemove(e, post)}>
                             Delete
                         </MyButton>
                     </div>
+                </MyModal>
+                <MyModal
+                    classAdd={classes['editor-form']}
+                    visible={modalEditor}
+                    setVisible={setModalEditor}
+                >
+                    <EditorForm post={post} update={handlerUpdate} modal />
                 </MyModal>
             </div>
         </>

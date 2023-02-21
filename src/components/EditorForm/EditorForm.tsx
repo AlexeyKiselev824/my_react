@@ -3,14 +3,15 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { IPost } from '../../models/IPost';
 import classes from './EditorForm.module.css';
 import { setInvisibleEditor } from '../../store/reducers/pagePostEditor';
-import { setBodyPost, setTitlePost } from '../../store/reducers/postFormSlice';
+import { resetForm, setBodyPost, setTitlePost } from '../../store/reducers/postFormSlice';
 
-interface EditorFormProps {
-    post: IPost | undefined;
+interface IEditorFormProps {
+    post?: IPost;
     update: (post: IPost) => void;
+    modal?: boolean;
 }
 
-const EditorForm: FC<EditorFormProps> = memo(({ post, update }) => {
+const EditorForm: FC<IEditorFormProps> = memo(({ post, update, modal }) => {
     const title = useAppSelector(state => state.formCreate.title);
     const body = useAppSelector(state => state.formCreate.body);
     const [disabled, setDisabled] = useState(true);
@@ -18,10 +19,10 @@ const EditorForm: FC<EditorFormProps> = memo(({ post, update }) => {
 
     const closeForm = (e: React.FormEvent) => {
         e.preventDefault();
-        dispatch(setInvisibleEditor())
+        dispatch(setInvisibleEditor());
     }
 
-    const handlerUpdatePost = (e: React.FormEvent) => {
+    const handlerUpdatePost = (e: React.FormEvent, title: string, body: string, post?: IPost) => {
         e.preventDefault();
         if (!title && body && post) {
             update({ ...post, body });
@@ -32,8 +33,7 @@ const EditorForm: FC<EditorFormProps> = memo(({ post, update }) => {
         if (title && body && post) {
             update({ ...post, title, body });
         }
-        dispatch(setBodyPost(''));
-        dispatch(setTitlePost(''));
+        dispatch(resetForm());
         dispatch(setInvisibleEditor());
     }
 
@@ -43,17 +43,17 @@ const EditorForm: FC<EditorFormProps> = memo(({ post, update }) => {
 
     return (
         <>
-            <form className={classes['form']} onSubmit={handlerUpdatePost}>
+            <form className={classes['form']} onSubmit={e => handlerUpdatePost(e, title, body, post)}>
                 <h1 className={classes['form__name']}>Post Editor</h1>
                 <textarea
-                    onChange={(e) => dispatch(setTitlePost(e.target.value))}
+                    onChange={e => dispatch(setTitlePost(e.target.value))}
                     className={classes['form__area']}
                     name="title"
                     defaultValue={post?.title}
                 >
                 </textarea>
                 <textarea
-                    onChange={(e) => dispatch(setBodyPost(e.target.value))}
+                    onChange={e => dispatch(setBodyPost(e.target.value))}
                     className={[classes['form__area'], classes['form__area-body']].join(' ')}
                     name="body"
                     defaultValue={post?.body}
@@ -65,7 +65,9 @@ const EditorForm: FC<EditorFormProps> = memo(({ post, update }) => {
                     type="submit"
                     value="Save changes"
                 />
-                <button onClick={closeForm} className={classes['form-close']}>x</button>
+                {!modal &&
+                    <button onClick={closeForm} className={classes['form-close']}>x</button>
+                }
             </form>
         </>
     )

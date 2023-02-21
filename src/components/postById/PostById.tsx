@@ -15,7 +15,7 @@ const PostById = memo(() => {
     const visibleEditor = useAppSelector(state => state.pagePostEditor.visible);
     const dispatch = useAppDispatch();
     const { data: post, isLoading, isError } = postsAPI.useGetPostByIdQuery(String(params.id));
-    const [updatePost, { }] = postsAPI.useUpdatePostMutation();
+    const [updatePost] = postsAPI.useUpdatePostMutation();
 
     const handlerUpdate = async (post: IPost) => {
         await updatePost(post)

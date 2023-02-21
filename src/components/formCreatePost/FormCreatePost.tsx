@@ -2,29 +2,30 @@ import React, { FC, memo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { IPost } from '../../models/IPost';
 import { postsAPI } from '../../services/PostsService';
-import { setBodyPost, setTitlePost } from '../../store/reducers/postFormSlice';
+import { resetForm, setBodyPost, setTitlePost } from '../../store/reducers/postFormSlice';
 import MyButton from '../UI/button/MyButton';
 import MyInput from '../UI/input/MyInput';
 import classes from './FormCreatePost.module.css'
 
-interface FormCreatePostProps {
+interface IFormCreatePostProps {
     setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const FormCreatePost: FC<FormCreatePostProps> = memo(({ setVisible }) => {
+type PostNoId = IPost & { id?: number }
+
+const FormCreatePost: FC<IFormCreatePostProps> = memo(({ setVisible }) => {
 
     const post = useAppSelector(state => state.formCreate);
     const dispatch = useAppDispatch();
-    const [createPost, { }] = postsAPI.useCreatePostMutation();
+    const [createPost] = postsAPI.useCreatePostMutation();
 
-    const handleCreatePost = async (e: React.FormEvent<HTMLButtonElement>) => {
-        if (post.title && post.body) {
-            e.preventDefault();
-            await createPost({ title: post.title, body: post.body } as IPost);
-            setVisible(false);
-            dispatch(setTitlePost(''));
-            dispatch(setBodyPost(''));
-        }
+    const handleCreatePost = async (e: React.FormEvent<HTMLButtonElement>, { title, body }: PostNoId) => {
+        e.preventDefault();
+        if (!title || !body) return null;
+
+        await createPost({ title, body } as IPost);
+        setVisible(false);
+        dispatch(resetForm());
     }
 
 
@@ -48,7 +49,7 @@ const FormCreatePost: FC<FormCreatePostProps> = memo(({ setVisible }) => {
                     placeholder="Body post"
                 />
                 <MyButton
-                    onClick={handleCreatePost}
+                    onClick={e => handleCreatePost(e, post as PostNoId)}
                     classAdd={classes['form-btn']}
                 >
                     Create Post

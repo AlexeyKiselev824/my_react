@@ -6,7 +6,7 @@ import { setDelay, setSearch, setSort } from '../../store/reducers/filterSlice';
 import MyInput from '../UI/input/MyInput';
 import MySelect from '../UI/select/MySelect';
 import useDebounce from '../../hooks/useDebounce';
-import { ILimit } from '../../models/ILimit';
+import { Limit } from '../../models/types';
 import { apiInitialState, setLimit } from '../../store/reducers/apiParamSlice';
 
 
@@ -34,7 +34,7 @@ const PostsFilter = memo(() => {
         dispatch(setDelay(query));
     }
 
-    function search(e: any) {
+    function search(e: React.ChangeEvent<HTMLInputElement>): void {
         dispatch(setSearch(e.target.value))
         debounceSearch(e.target.value);
     }
@@ -60,7 +60,7 @@ const PostsFilter = memo(() => {
                 <MySelect
                     value={limit}
                     valueDef={apiInitialState.limit}
-                    onChange={(e: ILimit) => dispatch(setLimit(e))}
+                    onChange={(e: Limit) => dispatch(setLimit(e))}
                     defaultValue="Limit posts"
                     options={selectLimit}
                 />

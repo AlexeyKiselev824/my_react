@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import classes from './HighlightingSyntax.module.css';
 
-interface HightLightingSyntaxProps {
+interface IHightLightingSyntaxProps {
     filter: string;
     str: string;
 }
 
-export const HightLightingSyntax: FC<HightLightingSyntaxProps> = ({ filter, str }) => {
+export const HightLightingSyntax: FC<IHightLightingSyntaxProps> = ({ filter, str }) => {
 
     if (!filter) return (<>{str}</>);
 

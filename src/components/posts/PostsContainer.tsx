@@ -29,7 +29,7 @@ const PostContainer = memo(() => {
     });
     const [, { isLoading: isLoadingCreate }] = postsAPI.useCreatePostMutation();
     const [removePost, { isLoading: isLoadingRemove }] = postsAPI.useRemovePostMutation();
-    const [updatePost, { isLoading: isLoadingUpdate }] = postsAPI.useUpdatePostMutation();
+    const [, { isLoading: isLoadingUpdate }] = postsAPI.useUpdatePostMutation();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -43,11 +43,6 @@ const PostContainer = memo(() => {
 
     const handleRemove = async (post: IPost) => {
         await removePost(post)
-        console.log(post)
-    }
-
-    const handlerUpdate = async (post: IPost) => {
-        await updatePost(post)
     }
 
     return (
@@ -72,7 +67,7 @@ const PostContainer = memo(() => {
                     }
                     {error && <h1 className={classes['posts-error']}>Opps... something went wrong</h1>}
                     {posts?.map(post =>
-                        <PostItem remove={handleRemove} update={handlerUpdate} key={post.id} post={post} />
+                        <PostItem remove={handleRemove} key={post.id} post={post} />
                     )}
                 </div>
                 <Pagination page={page} totalPages={totalPages ? totalPages : 0} />

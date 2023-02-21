@@ -1,36 +1,37 @@
 import React, { FC, ReactNode } from 'react';
 import { useAppDispatch } from '../../../hooks/redux';
-import { setBodyPost, setTitlePost } from '../../../store/reducers/postFormSlice';
+import { resetForm } from '../../../store/reducers/postFormSlice';
 import classes from './MyModal.module.css';
 
-interface MyModalProps {
+interface IMyModalProps {
     children: ReactNode;
     visible: boolean;
-    setVisible: any;
+    setVisible: React.Dispatch<React.SetStateAction<boolean>>;
     backgroundGreen?: true;
+    classAdd?: string;
 }
 
-const MyModal: FC<MyModalProps> = ({ children, visible, setVisible, backgroundGreen }) => {
+const MyModal: FC<IMyModalProps> = ({ children, visible, setVisible, backgroundGreen, classAdd }) => {
 
     const dispatch = useAppDispatch();
-
+    const modalClasses = [classes.myModalContent]
     const rootClasses = [classes.myModal];
+
     if (visible) {
         rootClasses.push(classes.active)
     }
 
+    modalClasses.push(classAdd);
+
     const invisible = () => {
         setVisible(false);
-        dispatch(setTitlePost(''));
-        dispatch(setBodyPost(''));
+        dispatch(resetForm());
     }
 
     return (
         <div className={rootClasses.join(' ')} onClick={invisible}>
-            <div className={backgroundGreen ? classes.myModalContent_green : classes.myModalContent} onClick={(e) => e.stopPropagation()}>
-                <div className={classes.myModal__container}>
-                    {children}
-                </div>
+            <div className={backgroundGreen ? classes.myModalContent_green : modalClasses.join(' ')} onClick={(e) => e.stopPropagation()}>
+                {children}
             </div>
         </div>
     )

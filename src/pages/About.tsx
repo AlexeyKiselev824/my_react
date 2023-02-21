@@ -4,9 +4,6 @@ import Layout from '../components/layout/Layout';
 import VideoFrame from '../components/videoFrame/VideoFrame';
 
 const About = () => {
-
-
-
     return (
         <>
             <Layout>

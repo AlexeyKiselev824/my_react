@@ -11,6 +11,7 @@ const Counter = memo(() => {
 
     function numberCounter() {
         const number = Number(prompt('Введите число'));
+        console.log(number)
         isNaN(number)
             ? alert('Введите число')
             : dispatch(incrementByAmountCounter(number));

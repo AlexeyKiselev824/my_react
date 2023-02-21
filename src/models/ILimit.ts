@@ -1,1 +1,0 @@
-export type ILimit = 5 | 10 | 25 | -1;

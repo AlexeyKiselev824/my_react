@@ -1,20 +1,19 @@
 import React, { FC, memo, SelectHTMLAttributes } from 'react';
 import classes from './MySelect.module.css';
 
-
-interface OptionsState {
+interface IOptionsState {
     value: string | number;
     name: string;
 }
 
-interface MySelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface IMySelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     classAdd?: string;
-    options: OptionsState[];
-    onChange: any;
+    options: IOptionsState[];
+    onChange: (item: any) => void;
     valueDef: string | number;
 }
 
-const MySelect: FC<MySelectProps> = memo(({ options, defaultValue, value, onChange, classAdd, valueDef }) => {
+const MySelect: FC<IMySelectProps> = memo(({ options, defaultValue, value, onChange, classAdd, valueDef }) => {
 
     const rootClasses = [classes.mySelect]
     rootClasses.push(classAdd);
@@ -24,7 +23,7 @@ const MySelect: FC<MySelectProps> = memo(({ options, defaultValue, value, onChan
             <select
                 className={rootClasses.join(' ')}
                 value={value}
-                onChange={e => onChange(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
             >
                 <option disabled value={valueDef}>{defaultValue}</option>
                 {options.map(option =>

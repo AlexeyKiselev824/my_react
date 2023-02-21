@@ -1,0 +1,1 @@
+export type Limit = 5 | 10 | 25 | -1;

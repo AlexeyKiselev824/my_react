@@ -1,11 +1,11 @@
 import React, { FC, InputHTMLAttributes, memo } from 'react';
 import classes from './MyInput.module.css';
 
-interface MyModalProps extends InputHTMLAttributes<HTMLInputElement> {
+interface IMyModalProps extends InputHTMLAttributes<HTMLInputElement> {
     classAdd?: string
 }
 
-const MyInput: FC<MyModalProps> = memo(({ classAdd, ...props }) => {
+const MyInput: FC<IMyModalProps> = memo(({ classAdd, ...props }) => {
 
     const rootClasses = [classes.myInput]
     rootClasses?.push(classAdd);
