@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ISort } from "../../models/ISort";
+import { TSort } from "../../models/types";
 
 interface FilterState {
     search: string;
-    sort: ISort;
+    sort: TSort;
     delay: string;
 }
 
@@ -20,7 +20,7 @@ export const filterSlice = createSlice({
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload
         },
-        setSort: (state, action: PayloadAction<ISort>) => {
+        setSort: (state, action: PayloadAction<TSort>) => {
             state.sort = action.payload
         },
         setDelay: (state, action: PayloadAction<string>) => {

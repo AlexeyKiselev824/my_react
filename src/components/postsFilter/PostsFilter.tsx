@@ -1,12 +1,11 @@
 import React, { memo } from 'react';
 import classes from './PostsFilter.module.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { ISort } from '../../models/ISort';
 import { setDelay, setSearch, setSort } from '../../store/reducers/filterSlice';
 import MyInput from '../UI/input/MyInput';
 import MySelect from '../UI/select/MySelect';
 import useDebounce from '../../hooks/useDebounce';
-import { Limit } from '../../models/types';
+import { TSort, TLimit } from '../../models/types';
 import { apiInitialState, setLimit } from '../../store/reducers/apiParamSlice';
 
 
@@ -53,14 +52,14 @@ const PostsFilter = memo(() => {
                     classAdd={classes['filter__selectors__sort']}
                     value={filter.sort}
                     valueDef=""
-                    onChange={(e: ISort) => dispatch(setSort(e))}
+                    onChanges={e => dispatch(setSort(e as TSort))}
                     defaultValue="Sort by"
                     options={selectSort}
                 />
                 <MySelect
                     value={limit}
                     valueDef={apiInitialState.limit}
-                    onChange={(e: Limit) => dispatch(setLimit(e))}
+                    onChanges={e => dispatch(setLimit(e as TLimit))}
                     defaultValue="Limit posts"
                     options={selectLimit}
                 />

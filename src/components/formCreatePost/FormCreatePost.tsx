@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { IPost } from '../../models/IPost';
+import { IPost } from '../../models/types';
 import { postsAPI } from '../../services/PostsService';
 import { resetForm, setBodyPost, setTitlePost } from '../../store/reducers/postFormSlice';
 import MyButton from '../UI/button/MyButton';

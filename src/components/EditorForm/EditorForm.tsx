@@ -1,12 +1,12 @@
-import React, { FC, memo, useMemo, useState } from 'react';
+import React, { FC, memo, useMemo, useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { IPost } from '../../models/IPost';
 import classes from './EditorForm.module.css';
 import { setInvisibleEditor } from '../../store/reducers/pagePostEditor';
 import { resetForm, setBodyPost, setTitlePost } from '../../store/reducers/postFormSlice';
+import { IPost } from '../../models/types';
 
 interface IEditorFormProps {
-    post?: IPost;
+    post: IPost;
     update: (post: IPost) => void;
     modal?: boolean;
 }
@@ -22,24 +22,27 @@ const EditorForm: FC<IEditorFormProps> = memo(({ post, update, modal }) => {
         dispatch(setInvisibleEditor());
     }
 
-    const handlerUpdatePost = (e: React.FormEvent, title: string, body: string, post?: IPost) => {
+    const handlerUpdatePost = (e: React.FormEvent, title: string, body: string, post: IPost) => {
         e.preventDefault();
-        if (!title && body && post) {
-            update({ ...post, body });
-        }
-        if (!body && title && post) {
-            update({ ...post, title });
-        }
-        if (title && body && post) {
-            update({ ...post, title, body });
-        }
-        dispatch(resetForm());
+
+        update({
+            ...post,
+            title: title ? title : post.title,
+            body: body ? body : post.body
+        })
+
         dispatch(setInvisibleEditor());
     }
 
     useMemo(() => {
         if (title || body) setDisabled(false);
     }, [title, body]);
+
+    useEffect(() => {
+        return () => {
+            dispatch(resetForm())
+        }
+    }, [])
 
     return (
         <>
@@ -49,14 +52,14 @@ const EditorForm: FC<IEditorFormProps> = memo(({ post, update, modal }) => {
                     onChange={e => dispatch(setTitlePost(e.target.value))}
                     className={classes['form__area']}
                     name="title"
-                    defaultValue={post?.title}
+                    defaultValue={post.title}
                 >
                 </textarea>
                 <textarea
                     onChange={e => dispatch(setBodyPost(e.target.value))}
                     className={[classes['form__area'], classes['form__area-body']].join(' ')}
                     name="body"
-                    defaultValue={post?.body}
+                    defaultValue={post.body}
                 >
                 </textarea>
                 <input

@@ -1,8 +1,8 @@
-import { IPost } from "../models/IPost";
-import { ISort } from "../models/ISort";
+import { IPost, TSort } from "../models/types";
 
 
-function sortedPosts(posts: IPost[], sort: ISort): IPost[] {
+
+function sortedPosts(posts: IPost[], sort: TSort): IPost[] {
     if (sort) {
         return [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
     }
@@ -10,7 +10,7 @@ function sortedPosts(posts: IPost[], sort: ISort): IPost[] {
 }
 
 
-export function sortedAndSearchedPosts(posts: IPost[], sort: ISort, searchDelay: string): IPost[] {
+export function sortedAndSearchedPosts(posts: IPost[], sort: TSort, searchDelay: string): IPost[] {
     const sortedPost = sortedPosts(posts, sort);
 
     return sortedPost.filter(post => post.title.toLowerCase().includes(searchDelay.toLowerCase()));

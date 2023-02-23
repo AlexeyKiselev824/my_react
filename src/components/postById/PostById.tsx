@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { IPost } from '../../models/IPost';
+import { IPost } from '../../models/types';
 import { postsAPI } from '../../services/PostsService';
 import { setInvisibleEditor, setVisibleEditor } from '../../store/reducers/pagePostEditor';
 import EditorForm from '../EditorForm/EditorForm';
@@ -63,11 +63,13 @@ const PostById = memo(() => {
                     }
                 </div>
             </div>
-            <div className={visibleEditor ? classes['form-visible'] : classes['form-invisible']}>
-                <div className='_container'>
-                    <EditorForm post={post} update={handlerUpdate} />
+            {post &&
+                <div className={visibleEditor ? classes['form-visible'] : classes['form-invisible']}>
+                    <div className='_container'>
+                        <EditorForm post={post} update={handlerUpdate} />
+                    </div>
                 </div>
-            </div>
+            }
         </>
     )
 })

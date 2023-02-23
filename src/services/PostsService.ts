@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BASE_URL_POSTS, URL_POSTS } from '../constants/api';
-import { IPost } from '../models/IPost'
+import { IPost } from '../models/types';
 
 interface QueryParamState {
     limit: number;
@@ -20,7 +20,7 @@ export const postsAPI = createApi({
             transformResponse(apiResponse: IPost[], meta) {
                 return { apiResponse, totalCount: Number(meta?.response?.headers.get('x-total-count')) }
             },
-            providesTags: result => ['Post']
+            providesTags: ['Post']
         }),
         getPostById: build.query<IPost, string>({
             query: (id) => ({

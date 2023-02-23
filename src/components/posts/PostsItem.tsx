@@ -2,7 +2,7 @@ import React, { FC, memo, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { URL_POSTS } from '../../constants/api';
 import { useAppSelector } from '../../hooks/redux';
-import { IPost } from '../../models/IPost';
+import { IPost } from '../../models/types';
 import { postsAPI } from '../../services/PostsService';
 import EditorForm from '../EditorForm/EditorForm';
 import MyButton from '../UI/button/MyButton';

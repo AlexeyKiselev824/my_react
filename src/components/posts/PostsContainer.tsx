@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
 import classes from './Posts.module.css';
-import { IPost } from '../../models/IPost';
 import { postsAPI } from '../../services/PostsService';
 import MyButton from '../UI/button/MyButton';
 import Loader from '../UI/loader/Loader';
@@ -13,6 +12,7 @@ import { sortedAndSearchedPosts } from '../../helpers/sortedAndSearchedPosts';
 import Pagination from '../UI/pagination/Pagination';
 import { getPagesCount } from '../../helpers/getPagesCount';
 import { apiInitialState, setLimit, setPage } from '../../store/reducers/apiParamSlice';
+import { IPost } from '../../models/types';
 
 const PostContainer = memo(() => {
     const searchDelay = useAppSelector(state => state.filter.delay);
