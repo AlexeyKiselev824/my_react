@@ -13,14 +13,14 @@ Front-end приложение для просмотра, создания и р
 `https://github.com/typicode/json-server`
 
 ## Для запуска:
-В первом окне терминала:
-```npm
+```
+npm clone https://github.com/AlexeyKiselev824/my_react
+```
+```
 npm install
-npm start
 ```
-Во втором окне терминала:
 ```
-./node_modules/json-server/lib/cli/bin.js --watch db.json --port 5000
+npm run dev
 ```
 
 ## Описание:
