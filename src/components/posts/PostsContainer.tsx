@@ -47,6 +47,9 @@ const PostContainer = memo(() => {
 
     return (
         <>
+            {(isLoading || isLoadingCreate || isLoadingRemove || isLoadingUpdate) &&
+                <Loader />
+            }
             <div className={[classes['posts_container'], '_container'].join(' ')}>
                 <div className={classes['search-sort']}>
                     <PostsFilter />
@@ -61,15 +64,10 @@ const PostContainer = memo(() => {
                 >
                     <FormCreatePost setVisible={setModal} />
                 </MyModal>
-                <div>
-                    {(isLoading || isLoadingCreate || isLoadingRemove || isLoadingUpdate) &&
-                        <Loader />
-                    }
-                    {error && <h1 className={classes['posts-error']}>Opps... something went wrong</h1>}
-                    {posts?.map(post =>
-                        <PostItem remove={handleRemove} key={post.id} post={post} />
-                    )}
-                </div>
+                {error && <h1 className={classes['posts-error']}>Opps... something went wrong</h1>}
+                {posts?.map(post =>
+                    <PostItem remove={handleRemove} key={post.id} post={post} />
+                )}
                 <Pagination page={page} totalPages={totalPages ? totalPages : 0} />
             </div>
         </>

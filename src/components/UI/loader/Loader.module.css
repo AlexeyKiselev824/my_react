@@ -3,6 +3,8 @@
     position: relative;
     width: 80px;
     height: 80px;
+    top: 10vh;
+    left: 45vw;
 }
 
 .ldsring div {
@@ -10,8 +12,6 @@
     display: block;
     position: absolute;
     z-index: 50;
-    top: 10vh;
-    left: 45vw;
     margin: 10px 0;
     width: 64px;
     height: 64px;
