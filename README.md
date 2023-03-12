@@ -14,7 +14,7 @@ Front-end приложение для просмотра, создания и р
 
 ## Для запуска:
 ```
-git clone https://github.com/AlexeyKiselev824/my_react
+git clone https://github.com/AlexeyKiselev824/my_react.git
 ```
 ```
 npm install
